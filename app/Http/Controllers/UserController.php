@@ -93,8 +93,9 @@ $input = $request->all();
 if(!empty($input['password'])){
 $input['password'] = Hash::make($input['password']);
 }else{
-$input = array_except($input,array('password'));
+$input['password'] = array_except($input,array('password'));
 }
+
 $user = User::find($id);
 $user->update($input);
 DB::table('model_has_roles')->where('model_id',$id)->delete();
